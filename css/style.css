@@ -1,0 +1,340 @@
+@import url(http://fonts.googleapis.com/earlyaccess/notosansjp.css);
+@import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
+/* -- LESS PLUG IN
+----- 這些都可以當 function 來用。
+----------------------------------------*/
+/* -- Universal Setting & Reset CSS
+--------------------------------------------------*/
+body {
+  font-family: 'Noto Sans TC', "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple LiGothic", "微軟正黑體", "Microsoft JhengHei";
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  overflow-x: hidden;
+  background: #f9f9f9;
+}
+a {
+  color: #7c7e83;
+  font-family: 'Times New Roman';
+}
+a,
+a:active,
+a:focus {
+  color: #7c7e83;
+  text-decoration: none;
+  cursor: pointer;
+}
+a:hover {
+  color: #323234;
+  text-decoration: none;
+}
+a.btnlink {
+  border-bottom: none;
+  padding: 4px 8px;
+  display: inline-block;
+}
+a.btnlink:hover {
+  background-color: #7c7e83;
+  color: #ffffff;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+  line-height: 1.4;
+}
+ruby {
+  display: inline-table;
+  text-align: center;
+  text-indent: 0px;
+  white-space: nowrap;
+  margin: 0px;
+  padding: 0px;
+  line-height: 1;
+  height: 1em;
+  vertical-align: bottom;
+  border: none;
+  margin-bottom: 2px;
+}
+ruby rb {
+  display: table-row-group;
+  line-height: 1;
+  text-align: center;
+  border: none;
+  margin: 0px;
+  padding: 0px;
+  white-space: nowrap;
+}
+ruby rt {
+  display: table-header-group;
+  font-size: 0.5em;
+  line-height: 1.1;
+  text-align: center;
+  white-space: nowrap;
+  border: none;
+  margin: 0px;
+  padding: 0px;
+}
+/* -- Align & Float
+----------------------------------------*/
+.center {
+  text-align: center;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.f-left {
+  float: left;
+}
+.f-right {
+  float: right;
+}
+.clear-both {
+  width: 100%;
+  height: 1px;
+  overflow: hidden;
+  clear: both;
+}
+/* -- Layout 
+----------------------------------------*/
+.center-content {
+  width: 90%;
+  margin: 0px auto;
+  overflow: hidden;
+  min-width: 1024px;
+}
+#youtube-box,
+#v-description,
+#note-box {
+  margin-top: 20px;
+}
+#youtube-box {
+  width: 100%;
+}
+#youtube-box .loading-block {
+  width: 100%;
+  height: 4px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  text-align: center;
+  display: block;
+  z-index: 2;
+}
+#youtube-box .loading-block .bar {
+  display: block;
+  width: 0px;
+  height: 100%;
+  background-color: #f1d032;
+}
+#youtube-box .loading-block.loading .bar {
+  width: 100%;
+  -webkit-transition: width 0.8s;
+  -moz-transition: width 0.8s;
+  -ms-transition: width 0.8s;
+  -o-transition: width 0.8s;
+}
+#youtube-box #youtube-frame {
+  width: 50%;
+  float: left;
+  height: 360px;
+  background-color: #333333;
+}
+#youtube-box #youtube-control,
+#youtube-box #youtube-list {
+  width: 48%;
+  float: right;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
+}
+#youtube-box #youtube-list {
+  min-height: 320px;
+  border: #ddd 2px solid;
+  border-radius: 4px;
+}
+#youtube-box .youtube-list-container {
+  position: relative;
+  height: 320px;
+  overflow: auto;
+  padding: 10px;
+}
+#youtube-box #youtube-control {
+  margin-top: 12px;
+  text-align: right;
+}
+#youtube-box #youtube-control > div {
+  display: inline-block;
+}
+#youtube-box #youtube-control button {
+  margin-left: 6px;
+  visibility: hidden;
+}
+#youtube-box #youtube-control button.visible {
+  visibility: visible;
+}
+#v-description {
+  width: 50%;
+  padding-bottom: 100px;
+  float: left;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #7c7e83;
+}
+#note-box {
+  width: 48%;
+  float: right;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
+}
+#note-box input,
+#note-box textarea {
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 18px;
+  padding: 10px;
+  height: auto;
+}
+#note-box .note-item {
+  position: relative;
+  margin-bottom: 10px;
+  border: #f1d032 1px solid;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  overflow: hidden;
+  padding: 10px;
+}
+#note-box .note-item > div {
+  margin-bottom: 6px;
+}
+#note-box .note-item .note-remove {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 18px;
+  height: 18px;
+  background: #f1d032;
+  cursor: pointer;
+  text-align: center;
+  line-height: 16px;
+  color: #ffffff;
+}
+#note-box .note-item .note-time {
+  color: #ffb600;
+  line-height: 1;
+  position: absolute;
+  right: 24px;
+  top: 2px;
+}
+#note-box .note-item .note-jp {
+  font-family: 'Noto Sans JP', sans-serif;
+  color: #333333;
+  font-size: 20px;
+  line-height: 1.2;
+}
+#note-box .note-item .note-zh {
+  color: #7c7e83;
+  font-size: 16px;
+}
+.video-item {
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border: #e9e9e9 2px solid;
+  overflow: hidden;
+  color: #333;
+  background-color: #e9e9e9;
+  cursor: pointer;
+}
+.video-item.video-item-template {
+  display: none;
+}
+.video-item .v-img {
+  width: 90px;
+  float: left;
+  overflow: hidden;
+}
+.video-item .v-img img {
+  width: 100%;
+  margin-top: -10%;
+  margin-bottom: -10%;
+}
+.video-item .v-data {
+  width: 100%;
+  padding-left: 100px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.video-item .v-data .v-name {
+  width: 100%;
+}
+.video-item:after {
+  content: " ";
+  width: 100%;
+  clear: both;
+  height: 1px;
+}
+.video-item.active {
+  color: #fff;
+  background-color: #666;
+  border: #666 2px solid;
+}
+.video-item.viewed .v-img {
+  position: relative;
+}
+.video-item.viewed .v-img:before {
+  content: "\f00c";
+  font-family: "FontAwesome";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-top: -20px;
+  margin-left: -20px;
+  background-color: rgba(51, 51, 51, 0.9);
+  color: #ffffff;
+  display: block;
+  z-index: 2;
+  font-size: 20px;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  border-radius: 40px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+.video-item.viewed .v-img img {
+  opacity: 0.6;
+}

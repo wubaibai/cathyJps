@@ -1,0 +1,472 @@
+@import url(http://fonts.googleapis.com/earlyaccess/notosansjp.css);
+@import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
+
+/* -- LESS PLUG IN
+----- 這些都可以當 function 來用。
+----------------------------------------*/
+	.text-shadow (@string: 0 1px 3px rgba(0, 0, 0, 0.25)) {
+		text-shadow: @string;
+	}
+	.box-shadow (@string) {
+		-webkit-box-shadow: @string;
+		-moz-box-shadow:    @string;
+		box-shadow:         @string;
+	}
+	.drop-shadow (@x: 0, @y: 1px, @blur: 2px, @spread: 0, @alpha: 0.25) {
+		-webkit-box-shadow:	@x @y @blur @spread rgba(0, 0, 0, @alpha);
+		-moz-box-shadow:	@x @y @blur @spread rgba(0, 0, 0, @alpha);
+		box-shadow:		@x @y @blur @spread rgba(0, 0, 0, @alpha);
+	}
+	.inner-shadow (@x: 0, @y: 1px, @blur: 2px, @spread: 0, @alpha: 0.25) {
+		-webkit-box-shadow: inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+		-moz-box-shadow:    inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+		box-shadow:         inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+	}
+	.box-sizing (@type: border-box) {
+		-webkit-box-sizing: @type;
+		-moz-box-sizing:    @type;
+		box-sizing:         @type;
+	}
+	.border-radius (@radius: 5px) {
+		-webkit-border-radius: @radius;
+		-moz-border-radius:    @radius;
+		border-radius:         @radius;
+
+		-moz-background-clip:    padding;
+		-webkit-background-clip: padding-box;
+		background-clip:         padding-box;
+	}
+	.border-radiuses (@topright: 0, @bottomright: 0, @bottomleft: 0, @topleft: 0) {
+		-webkit-border-top-right-radius:    @topright;
+		-webkit-border-bottom-right-radius: @bottomright;
+		-webkit-border-bottom-left-radius:  @bottomleft;
+		-webkit-border-top-left-radius:     @topleft;
+
+		-moz-border-radius-topright:        @topright;
+		-moz-border-radius-bottomright:     @bottomright;
+		-moz-border-radius-bottomleft:      @bottomleft;
+		-moz-border-radius-topleft:         @topleft;
+
+		border-top-right-radius:            @topright;
+		border-bottom-right-radius:         @bottomright;
+		border-bottom-left-radius:          @bottomleft;
+		border-top-left-radius:             @topleft;
+
+		-moz-background-clip:    padding; 
+		-webkit-background-clip: padding-box; 
+		background-clip:         padding-box; 
+	}
+	.opacity (@opacity) {
+	    @opacityPercentage: @opacity * 100;
+	    opacity: @opacity;
+	    -ms-filter: ~"progid:DXImageTransform.Microsoft.Alpha(opacity=(@{opacityPercentage}))"; 
+	    filter: ~"alpha(opacity = (@{opacityPercentage}))";
+	}
+	.gradient (@startColor: #eee, @endColor: white) {
+		background-color: @startColor;
+		background: -webkit-gradient(linear, left top, left bottom, from(@startColor), to(@endColor));
+		background: -webkit-linear-gradient(top, @startColor, @endColor);
+		background: -moz-linear-gradient(top, @startColor, @endColor);
+		background: -ms-linear-gradient(top, @startColor, @endColor);
+		background: -o-linear-gradient(top, @startColor, @endColor);
+	}
+	.horizontal-gradient (@startColor: #eee, @endColor: white) {
+	 	background-color: @startColor;
+		background-image: -webkit-gradient(linear, left top, right top, from(@startColor), to(@endColor));
+		background-image: -webkit-linear-gradient(left, @startColor, @endColor);
+		background-image: -moz-linear-gradient(left, @startColor, @endColor);
+		background-image: -ms-linear-gradient(left, @startColor, @endColor);
+		background-image: -o-linear-gradient(left, @startColor, @endColor);
+	}
+	.animation (@name, @duration: 300ms, @delay: 0, @ease: ease) {
+		-webkit-animation: @name @duration @delay @ease;
+		-moz-animation:    @name @duration @delay @ease;
+		-ms-animation:     @name @duration @delay @ease;
+	}
+	.transition (@transition) {
+		-webkit-transition: @transition;  
+		-moz-transition:    @transition;
+		-ms-transition:     @transition; 
+		-o-transition:      @transition;  
+	}
+	.transform(@string){
+		-webkit-transform: @string;
+		-moz-transform: 	 @string;
+		-ms-transform: 		 @string;
+		-o-transform: 		 @string;
+	}
+	.scale (@factor) {
+		-webkit-transform: scale(@factor);
+		-moz-transform: 	 scale(@factor);
+		-ms-transform: 		 scale(@factor);
+		-o-transform: 		 scale(@factor);
+	}
+	.rotate (@deg) {
+		-webkit-transform: rotate(@deg);
+		-moz-transform: 	 rotate(@deg);
+		-ms-transform: 		 rotate(@deg);
+		-o-transform: 		 rotate(@deg);
+	}
+	.skew (@deg, @deg2) {
+		-webkit-transform:       skew(@deg, @deg2);
+		-moz-transform: 	 skew(@deg, @deg2);
+		-ms-transform: 		 skew(@deg, @deg2);
+		-o-transform: 		 skew(@deg, @deg2);
+	}
+	.translate (@x, @y:0) {
+		-webkit-transform:       translate(@x, @y);
+		-moz-transform: 	 translate(@x, @y);
+		-ms-transform: 		 translate(@x, @y);
+		-o-transform: 		 translate(@x, @y);
+	}
+	.translate3d (@x, @y: 0, @z: 0) {
+		-webkit-transform:       translate3d(@x, @y, @z);
+		-moz-transform: 	 translate3d(@x, @y, @z);
+		-ms-transform: 		 translate3d(@x, @y, @z);
+		-o-transform: 		 translate3d(@x, @y, @z);
+	}
+	.perspective (@value: 1000) {
+		-webkit-perspective: 	@value;
+		-moz-perspective: 	@value;
+		-ms-perspective: 	@value;
+		perspective: 		@value;
+	}
+	.transform-origin (@x:center, @y:center) {
+		-webkit-transform-origin: @x @y;
+		-moz-transform-origin:    @x @y;
+		-ms-transform-origin:     @x @y;
+		-o-transform-origin:      @x @y;
+	}
+
+/* -- Universal Setting & Reset CSS
+--------------------------------------------------*/
+@theWhite : #ffffff;
+@theYellow : #f1d032;
+@theYellowD : #ffb600;
+@theGray: #7c7e83;
+@theDark: #333333;
+
+@color-theme : #042535;
+@color-theme-dark : #04222f;
+@color-theme-acent : #e65367;
+
+body {
+	font-family:'Noto Sans TC',"Helvetica Neue",Helvetica,Arial,sans-serif,"Apple LiGothic","微軟正黑體","Microsoft JhengHei";
+	font-weight: normal;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	overflow-x: hidden;
+	background: #f9f9f9;
+}
+
+a{
+	color: @theGray;
+	font-family: 'Times New Roman';
+}
+
+a,
+a:active,
+a:focus{
+	color: @theGray;
+	text-decoration: none;
+	cursor: pointer;
+}
+a:hover{
+	color: darken(@theGray, 30%);
+	text-decoration: none;
+}
+
+a.btnlink{
+	border-bottom: none;
+	padding: 4px 8px;
+	display: inline-block;
+}
+a.btnlink:hover{
+	background-color: @theGray;
+	color: @theWhite;
+}
+
+h1,h2,h3,h4,h5,h6{
+	font-weight: 400;
+	line-height: 1.4;
+}
+
+ruby{
+	display			: inline-table;
+	text-align		: center;
+	text-indent		: 0px;
+	white-space		: nowrap;
+	border			: none;
+	margin			: 0px;
+	padding			: 0px;
+	line-height		: 1;
+	height			: 1em;
+	vertical-align	: bottom;
+	border			: none;
+	margin-bottom 	: 2px;
+	rb {
+		display			: table-row-group;
+		line-height		: 1;
+		text-align		: center;
+		border			: none;
+		margin			: 0px;
+		padding			: 0px;
+		white-space		: nowrap;
+	}
+	rt {
+		display			: table-header-group;
+		font-size		: 0.5em;
+		line-height		: 1.1;
+		text-align		: center;
+		white-space		: nowrap;
+		border			: none;
+		margin			: 0px;
+		padding			: 0px;
+	}
+}
+
+// ::selection {
+// 	background:transparent;
+// }
+
+// ::-moz-selection {
+// 	background:transparent;
+// }
+
+/* -- Align & Float
+----------------------------------------*/
+.center{ text-align: center;}
+.left{ text-align: left;}
+.right{ text-align: right;}
+.f-left{ float: left; }
+.f-right{ float: right; }
+.clear-both{
+	width: 100%;
+	height: 1px;
+	overflow: hidden;
+	clear: both;
+}
+
+/* -- Layout 
+----------------------------------------*/
+.center-content{
+	width: 90%;
+	margin: 0px auto;
+	overflow: hidden;
+	min-width: 1024px;
+}
+
+#youtube-box,
+#v-description,
+#note-box{
+	margin-top: 20px;
+}
+
+#youtube-box{
+	width: 100%;
+	.loading-block{
+		width: 100%;
+		height: 4px;
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		text-align: center;
+		display: block;
+		z-index: 2;
+		.bar{
+			display: block;
+			width: 0px;
+			height: 100%;
+			background-color: @theYellow;
+		}
+		&.loading{
+			.bar{
+				width: 100%;
+				.transition(width 0.8s);
+			}
+		}
+	}
+	#youtube-frame{
+		width: 50%;
+		float: left;
+		height: 360px;
+		background-color: @theDark;
+	}
+	#youtube-control,
+	#youtube-list{
+		width: 48%;
+		float: right;
+		.box-sizing(border-box);
+		position: relative;
+	}
+	#youtube-list{
+		min-height: 320px;
+		border: #ddd 2px solid;
+		border-radius: 4px;
+	}
+	.youtube-list-container{
+		position: relative;
+		height: 320px;
+		overflow: auto;
+		padding: 10px;
+	}
+	#youtube-control{
+		margin-top: 12px;
+		text-align: right;
+		> div {
+			display: inline-block;
+		}
+		button{
+			margin-left: 6px;
+			visibility: hidden;
+			&.visible{
+				visibility: visible;
+			}
+		}
+	}
+}
+
+#v-description{
+	width: 50%;
+	padding-bottom: 100px;
+	float: left;
+	.box-sizing(border-box);
+	color: @theGray;
+}
+
+#note-box{
+	width: 48%;
+	float: right;
+	.box-sizing(border-box);
+	position: relative;
+	input, textarea{
+		width: 100%;
+		.box-sizing(border-box);
+		font-size: 18px;
+		padding: 10px;
+		height: auto;
+	}
+	.note-item{
+		position: relative;
+		margin-bottom: 10px;
+		border: @theYellow 1px solid;
+		.box-sizing(border-box);
+		.border-radius(2px);
+		overflow: hidden;
+		padding: 10px;
+		> div {
+			margin-bottom: 6px;
+		}
+		.note-remove{
+			position: absolute;
+			top: 0px;
+			right: 0px;
+			width: 18px;
+			height: 18px;
+			background: @theYellow;
+			cursor: pointer;
+			text-align: center;
+			line-height: 16px;
+			color: @theWhite;
+		}
+		.note-time{
+			color: @theYellowD;
+			line-height: 1;
+			position: absolute;
+			right: 24px;
+			top: 2px;
+		}
+		.note-jp{
+			font-family: 'Noto Sans JP', sans-serif;
+			color: @theDark;
+			font-size: 20px;
+			line-height: 1.2;
+		}
+		.note-zh{
+			color: @theGray;
+			font-size: 16px;
+		}
+	}
+}
+
+.video-item{
+	padding: 10px;
+	.box-sizing(border-box);
+	margin-bottom: 12px;
+	.border-radius(4px);
+	border: #e9e9e9 2px solid;
+	overflow: hidden;
+	color:#333;
+	background-color: #e9e9e9;
+	cursor: pointer;
+	&.video-item-template{
+		display: none;
+	}	
+	.v-img{
+		width: 90px;
+		float: left;
+		overflow: hidden;
+		img{
+			width: 100%;
+			margin-top: -10%;
+			margin-bottom: -10%;
+		}
+	}
+	.v-data{
+		width: 100%;
+		padding-left: 100px;
+		.box-sizing(border-box);
+		.v-id{
+		}
+		.v-name{
+			width: 100%;
+		}
+	}
+	&:after{
+		content: " ";
+		width: 100%;
+		clear: both;
+		height: 1px;
+	}
+	&.active{
+		color: #fff;
+		background-color: #666;
+		border: #666 2px solid;
+	}
+	&.viewed{
+		.v-img{
+			position: relative;
+			&:before{
+				content: "\f00c";
+				font-family: "FontAwesome";
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				margin-top: -20px;
+				margin-left: -20px;
+				background-color: fadeout(@theDark, 10%);
+				color: @theWhite;
+				display: block;
+				z-index: 2;
+				font-size: 20px;
+				text-align: center;
+				width: 40px;
+				height: 40px;
+				line-height: 40px;
+				.border-radius(40px);
+			}
+			img{
+				opacity: 0.6;
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
